@@ -9,14 +9,16 @@ struct rep_socio {
         int genfavs[MAX_GENEROS_FAVORITOS];
         int tope;
     }generos;
+    nat rango;
 };
  
-TSocio crearTSocio(int ci, const char nombre[MAX_NOMBRE_SOCIO], const char apellido[MAX_APELLIDO_SOCIO], nat diaAlta, nat mesAlta, nat anioAlta){
+TSocio crearTSocio(int ci, const char nombre[MAX_NOMBRE_SOCIO], const char apellido[MAX_APELLIDO_SOCIO], nat diaAlta, nat mesAlta, nat anioAlta,nat rango){
     TSocio nuevoSocio = new rep_socio;
     nuevoSocio->ciSocio = ci;
     strcpy(nuevoSocio->nombreSocio,nombre);
     strcpy(nuevoSocio->apellidoSocio,apellido);
     nuevoSocio->fechaAlta = crearTFecha(diaAlta,mesAlta,anioAlta);
+    nuevoSocio->rango = rango;
     nuevoSocio->generos.tope=0;
     return nuevoSocio;
 }
@@ -41,6 +43,10 @@ void liberarTSocio(TSocio &socio){
     socio = NULL;
     }
 }
+
+nat rangoTSocio(TSocio socio){
+    return socio->rango;
+};
 
 int ciTSocio(TSocio socio){
     int copiaCi = socio->ciSocio;

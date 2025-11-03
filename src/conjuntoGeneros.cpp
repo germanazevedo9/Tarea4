@@ -19,7 +19,6 @@ TConjuntoGeneros crearTConjuntoGeneros(int cantMax){
   return c;
 }
 
-
 void insertarTConjuntoGeneros(TConjuntoGeneros &c, int id){
   if (c == NULL) return;
   if (id < 0 || id >= c->cantMax) return;

@@ -36,18 +36,15 @@ typedef struct rep_colaDePrioridadReservas *TColaDePrioridadReservas;
 //   El tiempo de ejecución en el peor caso es O(N).
 TColaDePrioridadReservas crearTColaDePrioridadReservas(nat N);
 
-//   Modifica el criterio de prioridad: si el prioritario era el socio de menor rango,
-//   entonces pasa a ser el de mayor prioridad, y viceversa.
-//   Debe modificar la cola de forma de que se respete el nuevo criterio de prioridad.
-//   Se pide que el tiempo de ejecución en el peor caso sea O(n*log n), siendo 'n' la cantidad de
-//   elementos de 'cp'. Sin embargo, existe una solución que lo hace en O(n).
-void invertirPrioridadTColaDePrioridadReservas(TColaDePrioridadReservas &cp);
-
 //   Libera la memoria asignada a 'cp' y a cada uno de sus elementos.
 //   Es decir, libera la memoria asociada a todas las reservas que estén en la cola.
 //   El tiempo de ejecución en el peor caso es O(N), siendo 'N' el parámetro
 //   pasado en crearCP.
 void liberarTColaDePrioridadReservas(TColaDePrioridadReservas &cp);
+
+//   Devuelve 'true' si y solo si en 'cp' no hay elementos.
+//   El tiempo de ejecución en el peor caso es O(1).
+bool estaVaciaTColaDePrioridadReservas(TColaDePrioridadReservas cp);
 
 //   Inserta 'reserva' en 'cp'.
 //   El tiempo de ejecución en el peor caso es O(log N) siendo 'N' el parámetro pasado en crearCP.
@@ -55,20 +52,16 @@ void liberarTColaDePrioridadReservas(TColaDePrioridadReservas &cp);
 //   PRE: 1 <= rango <= N, siendo 'N' el parámetro pasado en crearTColaDePrioridadReservas.
 void insertarTColaDePrioridadReservas(TColaDePrioridadReservas &cp, TReserva reserva);
 
-//   Devuelve 'true' si y solo si en 'cp' no hay elementos.
-//   El tiempo de ejecución en el peor caso es O(1).
-bool estaVaciaTColaDePrioridadReservas(TColaDePrioridadReservas cp);
-
-//   Devuelve la reserva prioritario de 'cp'.
-//   El tiempo de ejecución en el peor caso es O(1).
-//   PRE: !estaVaciaTColaDePrioridadReservas(cp).
-TReserva prioritarioTColaDePrioridadReservas(TColaDePrioridadReservas cp);
-
 //   Elimina de 'cp' la reserva prioritario y libera la memoria asociada.
 //   Si estaVaciaTColaDePrioridadReservas(cp) la operación no tiene efecto.
 //   El tiempo de ejecución en el peor caso es O(log N), siendo 'N' el parámetro
 //   pasado en crearCP.
 void eliminarPrioritarioTColaDePrioridadReservas(TColaDePrioridadReservas &cp);
+
+//   Devuelve la reserva prioritario de 'cp'.
+//   El tiempo de ejecución en el peor caso es O(1).
+//   PRE: !estaVaciaTColaDePrioridadReservas(cp).
+TReserva prioritarioTColaDePrioridadReservas(TColaDePrioridadReservas cp);
 
 //   Devuelve 'true' si y solo si la reserva es un elemento de 'cp'.
 //   El tiempo de ejecución en el peor caso es O(n).
@@ -78,6 +71,14 @@ bool estaTColaDePrioridadReservas(TColaDePrioridadReservas cp, int ciSocio, int 
 //   Precondición: existe el socio 's' en alguna reserva de 'cp'
 //   El tiempo de ejecución en el peor caso es O(n).
 nat prioridadTColaDePrioridadReservas(TColaDePrioridadReservas cp, int ciSocio, int isbnLibro);
+
+//   Modifica el criterio de prioridad: si el prioritario era el socio de menor rango,
+//   entonces pasa a ser el de mayor prioridad, y viceversa.
+//   Debe modificar la cola de forma de que se respete el nuevo criterio de prioridad.
+//   Se pide que el tiempo de ejecución en el peor caso sea O(n*log n), siendo 'n' la cantidad de
+//   elementos de 'cp'. Sin embargo, existe una solución que lo hace en O(n).
+void invertirPrioridadTColaDePrioridadReservas(TColaDePrioridadReservas &cp);
+
 
 //   Hace una copia profunda de la cola de prioridad cp
 //   El tiempo de ejecucion en el peor caso es O(n)
