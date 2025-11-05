@@ -18,12 +18,11 @@ TColaDePrioridadReservas crearTColaDePrioridadReservas(nat N) {
     TColaDePrioridadReservas cp = new rep_colaDePrioridadReservas;
     cp->maxReservas = N;
     cp->topeCola = 0;  // cola vacía
-
     // Reservar espacio para N elementos (base 1)
     cp->colaDePrioridad = new TReserva[N + 1];
 
     // Inicializar a NULL
-    for (int i = 1; i <= cp->maxReservas; i++) {
+    for (int i = 0; i <= cp->maxReservas; i++) {
         cp->colaDePrioridad[i] = NULL;
     }
 
@@ -54,12 +53,12 @@ bool estaVaciaTColaDePrioridadReservas(TColaDePrioridadReservas cp) {
 
 void insertarTColaDePrioridadReservas(TColaDePrioridadReservas &cp, TReserva reserva) {
     // 1. hay espacio?
-    if (cp->topeCola >= cp->maxReservas) return;
+    if (cp->topeCola == cp->maxReservas) return;
 
     // 2. insertar al final
     cp->topeCola++;                      // pasa de 0→1, 1→2, etc.
     int pos = cp->topeCola;
-    cp->colaDePrioridad[pos] = reserva;
+    cp->colaDePrioridad[pos] =  reserva;
 
     // 3. heapify up (para MIN-HEAP, base 1)
     bool seguir = true;
@@ -173,18 +172,82 @@ nat prioridadTColaDePrioridadReservas(TColaDePrioridadReservas cp, int ciSocio, 
 
     return prioridad;
 }
+void insertarInvertido(TColaDePrioridadReservas &cp, TReserva reserva) {
+    // 1. hay espacio?
+    if (cp->topeCola == cp->maxReservas) return;
+
+    // 2. insertar al final
+    cp->topeCola++;                      // pasa de 0→1, 1→2, etc.
+    int pos = cp->topeCola;
+    cp->colaDePrioridad[pos] = reserva;
 
 
-void invertirPrioridadTColaDePrioridadReservas(TColaDePrioridadReservas &cp) {
+    bool seguir = true;
+    while (pos > 1 && seguir) {          // importante: > 1, no >= 1
+        int padre = pos / 2;
 
+        TSocio socioHijo  = socioTReserva(cp->colaDePrioridad[pos]);
+        TSocio socioPadre = socioTReserva(cp->colaDePrioridad[padre]);
+        int rangoHijo  = rangoTSocio(socioHijo);
+        int rangoPadre = rangoTSocio(socioPadre);
+
+        if (rangoHijo > rangoPadre) {
+            // swap
+            TReserva tmp = cp->colaDePrioridad[pos];
+            cp->colaDePrioridad[pos] = cp->colaDePrioridad[padre];
+            cp->colaDePrioridad[padre] = tmp;
+
+            pos = padre;  // seguir subiendo
+        } else {
+            seguir = false;
+        }
+    }
 }
 
+void invertirPrioridadTColaDePrioridadReservas(TColaDePrioridadReservas &cp) {
+    if (cp->topeCola <= 1) return;
+    
+    TColaDePrioridadReservas invertido = crearTColaDePrioridadReservas(cp->maxReservas);
+    
+    TSocio socioPrioritario = socioTReserva(cp->colaDePrioridad[1]);
+    TSocio socioSiguiente= socioTReserva(cp->colaDePrioridad[2]);
+    int rangoPrioritario  = rangoTSocio(socioPrioritario);
+    int rangoSiguiente = rangoTSocio(socioSiguiente);
+    int i = cp->topeCola;
+    if (rangoPrioritario<rangoSiguiente) {
+        while (i >= 1) {
+            insertarInvertido(invertido, copiarTReserva(cp->colaDePrioridad[i]));
+            i--;
+        }
+    } else {        
+        while (i >= 1) {
+            insertarTColaDePrioridadReservas(invertido, copiarTReserva(cp->colaDePrioridad[i]));
+            i--;
+        }
+    }
+    liberarTColaDePrioridadReservas(cp);
+    cp=invertido;
+}
+
+
 TColaDePrioridadReservas copiarTColaDePrioridadReservas(TColaDePrioridadReservas cp) {
-    return NULL;
+    TColaDePrioridadReservas copiaCola = crearTColaDePrioridadReservas(cp->maxReservas);
+    
+    // Copiar el tope
+    copiaCola->topeCola = cp->topeCola;
+    
+    // Copiar cada reserva individualmente
+    for (int i = 1; i <= cp->topeCola; i++) {
+        copiaCola->colaDePrioridad[i] = copiarTReserva(cp->colaDePrioridad[i]);
+    }
+    
+    return copiaCola;
 }
 
 void imprimirTColaDePrioridad(TColaDePrioridadReservas cp) {
-
+    for(int i=1;i<=cp->topeCola;i++){
+        imprimirTReserva(cp->colaDePrioridad[i]);
+    }
 }
 
 

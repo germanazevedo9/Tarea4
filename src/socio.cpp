@@ -107,6 +107,6 @@ TSocio copiarTSocio(TSocio socio){
     for(int i=0; i<socio->generos.tope;i++){
         copiaSocio->generos.genfavs[i] = socio->generos.genfavs[i];
     }
- 
+    copiaSocio->rango=socio->rango;
     return copiaSocio;
 }

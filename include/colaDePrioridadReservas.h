@@ -31,7 +31,7 @@ InCo-FIng-UDELAR
 typedef struct rep_colaDePrioridadReservas *TColaDePrioridadReservas;
 
 //   Devuelve una 'TColaDePrioridadReservas' vacía (sin elementos) que puede
-//   contener hasta N reservas.
+//   contener hasta N reservas.w
 //   La prioridad entre dos reservas se define por el que tenga menor rango
 //   El tiempo de ejecución en el peor caso es O(N).
 TColaDePrioridadReservas crearTColaDePrioridadReservas(nat N);
