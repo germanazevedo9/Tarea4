@@ -1,0 +1,14 @@
+40ee529ef69bce24fec563b474de3219f4b76ad9  src/fecha.cpp
+70ed4a3a18704102afc38a13b8c8066aaff37f54  src/libro.cpp
+ccab81ab66d6ce6ae1ea34ed5ac157816c8daa04  src/socio.cpp
+dc813c617b1b2c6b104a1cd956deba4d8f05e466  src/prestamo.cpp
+06794f43fb7bfcb427e6a4fa412960aabe005635  src/lseSocios.cpp
+3644599efa8e227db80abb2060c804dc922c4879  src/ldePrestamos.cpp
+2204e822e86f78eab3f73b7ad03a5094309aa7df  src/abbLibros.cpp
+3cb262ca494176eb637da3bd77fdf3a51d25ee38  src/reserva.cpp
+32405c682cb60060b33dbe8f64808d1e3bf7d6a0  src/colaReservas.cpp
+ba3c2526279418ff75e76e9c93f77523a7718174  src/agGeneros.cpp
+624786c7c88857396d3613e512eeff492a552dc8  src/conjuntoGeneros.cpp
+cd76d835a435cddf2096d3fd3f55818b6d06ade0  src/biblioteca.cpp
+32f21c6c17d6d5018b7b377c68a7a6404ae98dcd  src/colaDePrioridadReservas.cpp
+3d80ad182339c417e6f548a6ccf5c3c32a86d3a8  src/tablaReserva.cpp

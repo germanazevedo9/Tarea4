@@ -30,6 +30,11 @@ typedef struct rep_tablaTablaReserva *TTablaReserva;
 //  La función es O(max) peor caso.
 TTablaReserva crearTTablaReserva(int max, int N);
 
+//  Función para liberar la memoria asignada a una TTablaReserva.
+//  La función es O(n + max) peor caso, donde n es la cantidad actual de reservas en la tabla
+//  y max la cantidad esperada de reservas en la tabla.
+void liberarTTablaReserva(TTablaReserva &tabla);
+
 //  Función para insertar una asociación (isbn, reserva) en la tabla de reservas.
 //  La función asocia el isbn de un libro con su reserva.
 //  PRE: !perteneceTTablaReserva(tabla, reserva)
@@ -57,10 +62,6 @@ TColaDePrioridadReservas obtenerReservaTTablaReserva(TTablaReserva tabla, int is
 // La función es O(1) promedio.
 TReserva obtenerSigReservaTTablaReserva(TTablaReserva tabla, int isbn);
 
-//  Función para liberar la memoria asignada a una TTablaReserva.
-//  La función es O(n + max) peor caso, donde n es la cantidad actual de reservas en la tabla
-//  y max la cantidad esperada de reservas en la tabla.
-void liberarTTablaReserva(TTablaReserva &tabla);
 
 // IMPORTANTE: Los requisitos de tiempo de ejecución y de memoria específicos para
 // la implementación solicitada se encuentran en tablaFichaVacunacion.cpp

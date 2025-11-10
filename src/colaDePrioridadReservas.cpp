@@ -31,6 +31,17 @@ TColaDePrioridadReservas crearTColaDePrioridadReservas(nat N) {
 
 void liberarTColaDePrioridadReservas(TColaDePrioridadReservas &cp) {
     // Liberar todas las reservas activas
+    if(cp->colaDePrioridad[1] == NULL){
+          // Liberar el arreglo del heap
+        delete[] cp->colaDePrioridad;
+
+        // Liberar la estructura principal
+        delete cp;
+
+        // Dejar el puntero nulo por seguridad
+        cp = NULL;
+        return;
+    }
     for (int i = 1; i <= cp->topeCola; i++) {
         liberarTReserva(cp->colaDePrioridad[i]);
         cp->colaDePrioridad[i] = NULL;
